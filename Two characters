@@ -1,0 +1,53 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'alternate' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+from itertools import combinations
+
+def alternate(s):
+    m = c=0
+    a = list(set(s))
+    for i in range(len(a)):
+        for j in range(i+1,len(a)):
+            l = [a[i],a[j]]
+            if s.index(a[i]) < s.index(a[j]):
+                ind=0
+            else:
+                ind = 1
+            for char in s:
+                if char in l:
+                    if char == l[ind]:
+                        c += 1
+                        ind = ind ^ 1
+                    else:
+                        c = 0
+                        break
+            m = max(m,c)
+            c = 0
+    return m
+                        
+    
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    l = int(input().strip())
+
+    s = input()
+
+    result = alternate(s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
