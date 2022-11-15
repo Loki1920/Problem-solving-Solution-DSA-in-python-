@@ -1,0 +1,49 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'caesarCipher' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. STRING s
+#  2. INTEGER k
+#
+
+def caesarCipher(s, k):
+    x = ''
+    t = list('abcdefghijklmnopqrstuvwxyz')
+    m = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    for i in s:
+        if i in t:
+            f = (t.index(i)+k)%26
+            x = x+t[f]
+        elif i in m:
+            l = (m.index(i)+k)%26
+            x = x+m[l]
+        else:
+            x = x+i
+    return x
+    
+            
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    s = input()
+
+    k = int(input().strip())
+
+    result = caesarCipher(s, k)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
