@@ -1,0 +1,42 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'gameOfThrones' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+from collections import Counter
+def gameOfThrones(s):
+    n = len(s)
+    d = Counter(s)
+    l = list(d.values())
+    od = 0
+    for i in l:
+        if i%2==0:
+            pass
+        else:
+            od +=1
+    if od==0 or od ==1:
+        return 'YES'
+    else:
+        return "NO"
+        
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = gameOfThrones(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
