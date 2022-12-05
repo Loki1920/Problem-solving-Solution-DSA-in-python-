@@ -1,0 +1,11 @@
+for i in range(int(input())):
+    n, h = map(int, input().split(" "))
+    
+    if h == 1:
+        print(2)
+    else:
+        if n % 2 == 0:
+            print(2)
+        else:
+            print(1)
+# logical question - observe pattern and solve accordingly
