@@ -1,0 +1,9 @@
+from functools import reduce
+
+for _ in range(int(input())):
+    n = int(input())
+    piles = list(map(int, input().split()))
+    if reduce(lambda x, y: x ^ y, piles) == 0:
+        print('Second')
+    else:
+        print('First')
