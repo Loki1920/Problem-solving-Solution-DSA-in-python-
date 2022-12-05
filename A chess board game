@@ -1,0 +1,7 @@
+t = int(input())
+for _ in range(t):
+    x , y = map(int,input().split())
+    if x%4==0 or x%4 ==3 or y%4==0 or y%4==3:
+        print("First")
+    else:
+        print("Second")
