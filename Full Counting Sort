@@ -1,0 +1,38 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'countSort' function below.
+#
+# The function accepts 2D_STRING_ARRAY arr as parameter.
+#
+
+def countSort(arr):
+    r = [[] for i in range(100)]
+    for i in range(n//2):
+        r[int(arr[i][0])].append('-')
+    for i in range(n//2,n):
+        r[int(arr[i][0])].append(arr[i][1])
+    for st in r:
+        if st:
+            print(*st,end=' ')
+    
+    
+        
+    
+    # Write your code here
+
+if __name__ == '__main__':
+    n = int(input().strip())
+
+    arr = []
+
+    for _ in range(n):
+        arr.append(input().rstrip().split())
+
+    countSort(arr)
