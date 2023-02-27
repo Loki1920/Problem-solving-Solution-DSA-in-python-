@@ -1,0 +1,47 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+
+#
+# Complete the 'isValid' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def isValid(s):
+    a = Counter(s)
+    val = list(a.values())
+    res = Counter(val)
+    v = Counter(res)
+    if len(s)==1 or (max(v)-min(v)==0):
+        return 'YES'
+    if len(v) < 3 and ((max(v)-min(v)==1 and res.get(max(v))==1) or (min(v)==1 and res.get(min(v))==1)):
+        return 'YES'
+    else:
+        return 'NO'
+        
+    
+        
+            
+        
+    
+    
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = isValid(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
