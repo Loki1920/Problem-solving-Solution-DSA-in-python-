@@ -1,0 +1,44 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'sherlockAndAnagrams' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+from collections import Counter
+def sherlockAndAnagrams(s):
+    c = 0
+    d = Counter(s)
+    for i in range(2,len(s)):
+        sb = s[0:i]
+        l = len(sb)
+        d["".join(sorted(sb))] += 1
+        for j in range(1,len(s)):
+            if j+ l <= len(s):
+                d["".join(sorted(s[j:j+l]))] += 1
+                
+    for k,v in d.items():
+        c+= v * (v-1)//2
+    return c
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input().strip())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = sherlockAndAnagrams(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
