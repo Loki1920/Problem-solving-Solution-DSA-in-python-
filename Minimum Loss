@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'minimumLoss' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts LONG_INTEGER_ARRAY price as parameter.
+#
+
+def minimumLoss(price):
+    m = 1234567890
+    k = sorted(price)
+    for i in range(len(k)-1):
+        x = k[i+1]-k[i]
+        if x < m and (price.index(k[i]) > price.index(k[i+1])):
+            m = x
+    return m
+            
+            
+        
+                
+    # Write your code here
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    price = list(map(int, input().rstrip().split()))
+
+    result = minimumLoss(price)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
