@@ -1,0 +1,31 @@
+m_rows, n_cols = int(input()), int(input())
+matrix = []
+for i in range(0, m_rows):
+    matrix.append(list(map(int, input().split())))
+cellCtr = 0
+
+def maxConnectedGrid():
+    global cellCtr
+    maxCtr = 0
+    for i in range(0, m_rows):
+        for j in range(0, n_cols):
+            dfs(i, j)
+            if (cellCtr > maxCtr):
+                maxCtr = cellCtr
+            cellCtr = 0
+    return maxCtr
+
+def dfs(row, col):
+    global cellCtr
+    if(row < 0 or row >= m_rows or col < 0 or col >= n_cols or matrix[row][col] == 0):
+        return
+    
+    matrix[row][col] = 0
+    cellCtr += 1
+    
+    dfs(row-1, col-1) ;  dfs(row-1, col) ;   dfs(row-1, col+1)
+    dfs(row,   col-1) ;                      dfs(row,   col+1)
+    dfs(row+1, col-1) ;  dfs(row+1, col) ;   dfs(row+1, col+1)
+    
+    
+print(maxConnectedGrid())
