@@ -1,0 +1,40 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'shortPalindrome' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+
+def shortPalindrome(s):
+  arr1 = [0]*26
+  arr2 = [[0]*26 for i in range(26)]
+  arr3 = [0]*26
+  ans = 0
+  for i in range(len(s)):
+      idx = ord(s[i]) - ord('a')
+      ans += arr3[idx]
+      for j in range(26):
+          arr3[j] += arr2[j][idx]
+      for j in range(26):
+          arr2[j][idx] += arr1[j]
+      arr1[idx] += 1
+  return ans % (10**9+7)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = shortPalindrome(s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
