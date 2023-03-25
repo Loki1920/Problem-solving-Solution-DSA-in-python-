@@ -1,0 +1,35 @@
+def search(g, m, n, i, j, c = 0):
+    if g[i][j] == '*':
+        return c
+    g[i][j] = 0
+    moves = getmoves(g, m, n, i, j)
+    if len(moves) > 1:
+        c += 1
+    for mv in moves:
+        res = search(g, m, n, mv[0], mv[1], c)
+        if res != None:
+            return res
+    return None
+
+def getmoves(g, m, n, i, j):
+    l, v = [], ('.', '*')
+    if i > 0 and g[i - 1][j] in v:
+        l.append((i - 1, j))
+    if j > 0 and g[i][j - 1] in v:
+        l.append((i, j - 1))
+    if i < m - 1 and g[i + 1][j] in v:
+        l.append((i + 1, j))
+    if j < n - 1 and g[i][j + 1] in v:
+        l.append((i, j + 1))
+    return l
+
+for _ in range(int(input())):
+    m, n = map(int, input().split())
+    g = [list(input()) for _ in range(m)]
+    k = int(input())
+    for i in range(m):
+        for j in range(n):
+            if g[i][j] == 'M':
+                print('Impressed' if search(g, m, n, i, j) == k else 'Oops!')
+                break
+    
