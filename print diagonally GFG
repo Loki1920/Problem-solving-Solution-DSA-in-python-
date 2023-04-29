@@ -1,0 +1,32 @@
+#User function Template for python3
+
+def downwardDiagonal(N, A): 
+    # code here 
+    l = []
+    for m in range(N+N-1):
+        for j in range(N):
+            for k in range(N):
+                if j+k==m:
+                    l.append(A[j][k])
+    return l
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        n = int(input())
+        matrix =[]
+        for i in range(n):
+            row = list(map(int, input().strip().split()))
+            matrix.append(row)
+        ans = downwardDiagonal(n,matrix)
+        for i in ans:
+            print(i,end=" ")
+        print()
+
+# } Driver Code Ends
