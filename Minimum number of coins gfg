@@ -1,0 +1,35 @@
+#User function Template for python3
+
+class Solution:
+    def minPartition(self, N):
+        l = [2000,500,200,100,50,20,10,5,2,1]
+        
+        i = 0
+        a = []
+        
+        while i < len(l):
+            if l[i]>N:
+                i+=1
+            else:
+                a.append(l[i])
+                N-=l[i]
+        return a
+            
+        # code here
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        N = int(input())
+        
+        ob = Solution()
+        arr = ob.minPartition(N)
+        for i in range(len(arr)):
+            print(arr[i],end=" ")
+        print()
+# } Driver Code Ends
