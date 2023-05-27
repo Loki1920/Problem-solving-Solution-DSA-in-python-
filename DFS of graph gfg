@@ -1,0 +1,38 @@
+#User function Template for python3
+
+#User function Template for python3
+
+class Solution:
+    def dfs(self,ind,vs,adj,ls):
+        vs[ind] = True
+        ls.append(ind)
+        for nbr in adj[ind]:
+            if vs[nbr] == False:
+                self.dfs(nbr,vs,adj,ls)
+    #Function to return a list containing the DFS traversal of the graph.
+    def dfsOfGraph(self, V, adj):
+        vs = [False for _ in range(V)]
+        ls = []
+        self.dfs(0,vs,adj,ls)
+        return ls
+
+        
+
+#{ 
+ # Driver Code Starts
+if __name__ == '__main__':
+    T=int(input())
+    while T>0:
+        V,E=map(int,input().split())
+        adj=[[] for i in range(V+1)]
+        for i in range(E):
+            u,v=map(int,input().split())
+            adj[u].append(v)
+            adj[v].append(u)
+        ob=Solution()
+        ans=ob.dfsOfGraph(V,adj)
+        for i in range(len(ans)):
+            print(ans[i],end=" ")
+        print()
+        T-=1
+# } Driver Code Ends
