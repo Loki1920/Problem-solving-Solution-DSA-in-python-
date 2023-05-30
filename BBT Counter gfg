@@ -1,0 +1,9 @@
+#User function Template for python3
+class Solution:
+    def countBT (self, h):
+        dp = [0] * (h+1)
+        dp[0] = dp[1] = 1
+        MOD = 1000000007
+        for i in range(2, h+1):
+            dp[i] = dp[i-1] * ((2 * dp[i-2])%MOD + dp[i-1])%MOD
+        return dp[-1]%MOD
