@@ -1,0 +1,26 @@
+#User function Template for python3
+
+class Solution:
+    def findPosition(self, N):
+        s = str(bin(N))
+        if s.count('1') > 1 or s.count('1') == 0:
+            return -1
+        
+        for i in range(len(s)):
+            if s[i]=='1':
+                return len(s)-i
+        # code here 
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__': 
+    t = int (input ())
+    for _ in range (t):
+        N = int(input())
+        
+        ob = Solution()
+        print(ob.findPosition(N))
+# } Driver Code Ends
