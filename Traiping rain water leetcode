@@ -1,0 +1,26 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        l = [0] * n
+        r = [0] * n
+        lm = height[0]
+
+        for i in range(n):
+            if lm < height[i]:
+                lm = height[i]
+            l[i] = lm
+
+        
+
+        rm = height[n-1] 
+        for i in range(n-1,-1,-1):
+            if rm < height[i]:
+                rm = height[i]
+            r[i] = rm
+
+        s = 0
+        for i in range(n):
+            s += min(l[i],r[i])-height[i]
+
+        return s
+            
