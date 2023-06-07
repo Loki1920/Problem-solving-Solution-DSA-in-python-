@@ -1,0 +1,50 @@
+#User function Template for python3
+
+'''
+class Node:
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+'''
+class Solution:
+    def printBoundaryView(self, root):
+        if not root:
+            return []
+        result = []
+        result.append(root.data)
+        self.printLeftBoundaryView(root.left, result)
+        self.printLeavesView(root.left, result)
+        self.printLeavesView(root.right, result)
+        self.printRightBoundaryView(root.right, result)
+        return result
+
+    def printLeftBoundaryView(self, node, result):
+        if not node:
+            return
+        if node.left or node.right:
+            result.append(node.data)
+        if node.left:
+            self.printLeftBoundaryView(node.left, result)
+        else:
+            self.printLeftBoundaryView(node.right, result)
+
+    def printRightBoundaryView(self, node, result):
+        if not node:
+            return
+        if node.left or node.right:
+            if node.right:
+                self.printRightBoundaryView(node.right, result)
+            else:
+                self.printRightBoundaryView(node.left, result)
+            result.append(node.data)
+
+    def printLeavesView(self, node, result):
+        if not node:
+            return
+        self.printLeavesView(node.left, result)
+        if not node.left and not node.right:
+            result.append(node.data)
+        self.printLeavesView(node.right, result)
+
+
