@@ -1,0 +1,27 @@
+
+class Solution:
+    def countDistinct(self, A, N, K):
+        # Code here
+        l,r = 0, K
+        
+        res = []
+        while r <= N:
+           a = set(A[l:r])
+           res.append(len(a))
+           l += 1
+           r += 1
+        return res
+
+
+#{ 
+ # Driver Code Starts
+if __name__=='__main__':
+    t = int(input())
+    for i in range(t):
+        n,k = list(map(int, input().strip().split()))
+        arr = list(map(int, input().strip().split()))
+        res = Solution().countDistinct(arr, n, k)
+        for i in res:
+            print (i, end = " ")
+        print ()
+# } Driver Code Ends
