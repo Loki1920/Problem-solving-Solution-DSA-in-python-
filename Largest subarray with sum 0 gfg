@@ -1,0 +1,36 @@
+#Your task is to complete this function
+#Your should return the required output
+#Your task is to complete this function
+#Your should return the required output
+class Solution:
+    def maxLen(self, n, arr):
+        #Code here
+        zero_length = 0
+        sum_map = {}
+        current_sum = 0
+        for start, num in enumerate(arr):
+            current_sum += num
+            if current_sum == 0:
+                zero_length = start+1
+            if current_sum in sum_map:
+                zero_length = max(zero_length, start - sum_map[current_sum])
+            else:
+                sum_map[current_sum] = start
+                
+        return zero_length
+                
+        
+        #Code here
+
+
+#{ 
+ # Driver Code Starts
+if __name__=='__main__':
+    t= int(input())
+    for i in range(t):
+        n = int(input())
+        arr = list(map(int, input().strip().split()))
+        ob = Solution()
+        print(ob.maxLen(n ,arr))
+# Contributed by: Harshit Sidhwa
+# } Driver Code Ends
