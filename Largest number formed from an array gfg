@@ -1,0 +1,40 @@
+#User function Template for python3
+from itertools import combinations
+class Solution:
+
+	def printLargest(self,arr):
+	    '''
+	    
+	    for i,n in enumerate(arr):
+	        arr[i] = str(n)
+	    def compare(self,n1,n2):
+	        if n1 + n2 > n2 + n1:
+	            return -1
+	        else:
+	            return 1
+	    arr = sorted(arr,key= cmp_to_key(self.compare))
+	    return str(int("".join(arr)))
+	    # code here
+	    '''
+	    max_length = len(max(arr, key=len))
+        return "".join(sorted(arr,reverse=True,key=lambda x: x*max_length))
+
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+import functools
+
+if __name__ == '__main__':
+    tc = int(input())
+    while tc > 0:
+        n = int(input())
+        arr = list(map(str, input().strip().split()))
+        ob = Solution()
+        ans = ob.printLargest(arr)
+        print(ans)
+        tc -= 1
+
+# } Driver Code Ends
