@@ -1,0 +1,54 @@
+from typing import List
+class Solution:
+    #Function to detect cycle in an undirected graph.
+	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+		#Code here
+		visited = [False] * V
+		helper = [False] * V
+		for i in range(V):
+		    if visited[i] == False:
+		        ans = self.DFS(i,visited , helper)
+		        if ans == True:
+		            return True
+	    return False
+	    
+    def DFS(self, i ,visited ,helper):
+        visited[i] = True
+        helper[i] = True
+        neighbours = self.adj[i]
+        for i in range(len(neighbours)):
+            curr = neighbours[k]
+            if helper[curr] == True:
+                return True
+            if visited[curr] == False:
+                ans = self.DFS(curr,visited , helper )
+                if ans == True:
+                    return True
+        helper[i] = False
+        return False
+		
+		
+		
+
+
+#{ 
+ # Driver Code Starts
+
+if __name__ == '__main__':
+
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().split())
+		adj = [[] for i in range(V)]
+		for _ in range(E):
+			u, v = map(int, input().split())
+			adj[u].append(v)
+			adj[v].append(u)
+		obj = Solution()
+		ans = obj.isCycle(V, adj)
+		if(ans):
+			print("1")
+		else:
+			print("0")
+
+# } Driver Code Ends
