@@ -1,0 +1,64 @@
+from collections import deque
+
+class Solution:
+    def minStepToReachTarget(self, KnightPos, TargetPos, N):
+     
+        # Offsets for the possible moves of the knight
+        row_offsets = [2, 2, -2, -2, 1, 1, -1, -1]
+        col_offsets = [-1, 1, 1, -1, 2, -2, 2, -2]
+
+        # Create a visited matrix to track visited cells
+        visited = [[False for _ in range(N + 1)] for _ in range(N + 1)]
+
+        # Create a queue for BFS traversal
+        queue = deque()
+
+        # Add the knight's starting position to the queue
+        queue.append((KnightPos[0], KnightPos[1], 0))
+
+        # Mark the knight's starting position as visited
+        visited[KnightPos[0]][KnightPos[1]] = True
+
+        # Perform BFS traversal
+        while queue:
+            # Get the current position and distance from the queue
+            i, j, distance = queue.popleft()
+
+            # Check if we have reached the target position
+            if i == TargetPos[0] and j == TargetPos[1]:
+                return distance
+
+            # Explore all possible moves from the current position
+            for k in range(8):
+                new_i = i + row_offsets[k]
+                new_j = j + col_offsets[k]
+
+                # Check if the new position is valid and not visited
+                if 1 <= new_i <= N and 1 <= new_j <= N and not visited[new_i][new_j]:
+                    queue.append((new_i, new_j, distance + 1))
+                    visited[new_i][new_j] = True
+
+        # If we couldn't reach the target position, return -1
+        return -1
+        
+        
+        
+        
+
+		
+		
+
+
+#{ 
+ # Driver Code Starts
+
+T=int(input())
+for i in range(T):
+	N = int(input())
+	KnightPos = list(map(int, input().split()))
+	TargetPos = list(map(int, input().split()))
+	obj = Solution()
+	ans = obj.minStepToReachTarget(KnightPos, TargetPos, N)
+	print(ans)
+
+# } Driver Code Ends
