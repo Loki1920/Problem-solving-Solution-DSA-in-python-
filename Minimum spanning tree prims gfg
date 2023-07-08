@@ -1,0 +1,59 @@
+#User function Template for python3
+
+class Solution:
+    
+    #Function to find sum of weights of edges of the Minimum Spanning Tree.
+    
+    def minkey(self,mstset,adj,dist):
+        min_key = float('inf')
+        min_val = 0
+        for i in range(len(mstset)):
+            if mstset[i] == 0 and min_key > dist[i]:
+                min_val = i
+                min_key = dist[i]
+                
+        return min_val
+    
+    def spanningTree(self, V, adj):
+        #code here
+        dist = [float('inf') for _ in range(V)]
+        parent = [-1 for _ in range(V)]
+        mstset = [0 for _ in range(V)]
+        
+        mstset[0] = 1
+        dist[0] = 0
+        
+        for i in range(V):
+            k = self.minkey(mstset,adj,dist)
+            mstset[k] = 1
+            for j in adj[k]:
+                if mstset[j[0]] ==0 and dist[j[0]] > j[1]:
+                    parent[j[0]] = k
+                    dist[j[0]] = j[1]
+        return sum(dist)
+        
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+import atexit
+import io
+import sys
+
+# Contributed by : Nagendra Jha
+
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases):
+        V,E = map(int,input().strip().split())
+        adj = [[] for i in range(V)]
+        for i in range(E):
+            u,v,w = map(int,input().strip().split())
+            adj[u].append([v,w])
+            adj[v].append([u,w])
+        ob = Solution()
+        
+        print(ob.spanningTree(V,adj))
+# } Driver Code Ends
