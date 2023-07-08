@@ -1,0 +1,57 @@
+#User function Template for python3
+
+class Solution:
+    
+    def cycle(self,node,visited,path_visited,adj):
+        visited[node] = True
+        path_visited[node] = True
+        
+        for i in adj[node]:
+            if path_visited[i]:
+                return True
+            if not visited[i]:
+                if self.cycle(i,visited,path_visited,adj):
+                    return True
+        path_visited[node] = False
+        return False
+        
+                
+        
+    def isPossible(self,N,P,prerequisites):
+        #code here
+        adj = [[] for i in range(N)]
+        for i in range(P):
+            ver1 , ver2 = prerequisites[i][0], prerequisites[i][1]
+            adj[ver2].append(ver1)
+        
+        # check if cycle exists
+        visited = [False for i in range(N)]
+        path_visited = [False for i in range(N)]
+        
+        for i in range(N):
+            if not visited[i]:
+                if self.cycle(i, visited, path_visited, adj):
+                    return False
+        return True
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases) :
+        N=int(input())
+        P=int(input())
+
+        prerequisites=[]
+        for _ in range(P):
+            pair = [int(x) for x in input().split()]
+            prerequisites.append(pair)
+        ob=Solution()
+        if(ob.isPossible(N,P,prerequisites)):
+            print("Yes")
+        else:
+            print("No")
+# } Driver Code Ends
