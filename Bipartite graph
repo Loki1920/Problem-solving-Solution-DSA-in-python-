@@ -1,0 +1,49 @@
+from collections import deque
+class Solution:
+    
+    
+        
+	def isBipartite(self, V, adj):
+	    N = len(adj)
+	    col = [-1] * N
+	    
+	    for i in range(N):
+	        if col[i] != -1:
+	            continue
+	        q = deque()
+	        q.append((i,0))
+	        #BFS
+	        while q:
+	            node,color = q.popleft()
+	            if col[node] == -1:
+	                    col[node] = color
+	                    for nx in adj[node]:
+	                        q.append((nx,color^1))
+	                        
+	            if col[node] != color:
+	                return False
+	    return True
+	    
+		#code here
+
+
+#{ 
+ # Driver Code Starts
+
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().strip().split())
+		adj = [[] for i in range(V)]
+		for i in range(E):
+			u, v = map(int, input().strip().split())
+			adj[u].append(v)
+			adj[v].append(u)
+		obj = Solution()
+		ans = obj.isBipartite(V, adj)
+		if(ans):
+			print("1")
+		else:
+			print("0")
+
+# } Driver Code Ends
