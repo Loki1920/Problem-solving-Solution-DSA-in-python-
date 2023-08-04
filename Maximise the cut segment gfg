@@ -1,0 +1,51 @@
+#User function Template for python3
+import sys
+
+dp = [-1] * 10001
+
+class Solution:
+    
+    
+    
+    def func(self,l,p,q,r):
+        if l==0 or l<0:
+            return 0
+            
+        if dp[l] != -1:
+            return dp[l]
+        a,b,c = -1 * sys.maxsize,-1 * sys.maxsize,-1 * sys.maxsize
+        
+        if p<=l:
+            a = self.func(l-p,p,q,r)
+        if q <=l:
+            b = self.func(l-q,p,q,r)
+        if r <= l:
+            c = self.func(l-r,p,q,r)
+            
+        dp[l] = 1 + max(max(a,b),c)
+        return dp[l]
+    
+    
+    #Function to find the maximum number of cuts.
+    def maximizeTheCuts(self,n,x,y,z):
+        #code her
+        for i in range(len(dp)):
+            dp[i] = -1
+        ans = self.func(n,x,y,z)
+        if ans < 0:
+            return 0
+        return ans
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+#contributed by RavinderSinghPB
+if __name__ == '__main__':
+    t=int(input())
+    for tcs in range(t):
+        n=int(input())
+        x,y,z=[int(x) for x in input().split()]
+        
+        print(Solution().maximizeTheCuts(n,x,y,z))
+# } Driver Code Ends
