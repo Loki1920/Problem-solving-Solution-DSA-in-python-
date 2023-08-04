@@ -1,0 +1,50 @@
+# User function Template for Python3
+
+class Solution:
+    def collectGold(self,x,y,n,m,gold,dp):
+        if (x<0) or (x==n) or (y==m):
+            return 0
+            
+        if dp[x][y] != -1:
+            return dp[x][y]
+            
+            
+        rightupper = self.collectGold(x-1,y+1,n,m,gold,dp)
+        right = self.collectGold(x,y+1,n,m,gold,dp)
+        rightdown = self.collectGold(x+1,y+1,n,m,gold,dp)
+        
+        dp[x][y] =  gold[x][y] + max(max(rightupper,rightdown),right)
+        
+        return dp[x][y]
+        
+        
+        
+    def maxGold(self, n, m, M):
+        # code here
+        maxg = 0
+        dp = [[-1 for i in range(m)] for j in range(n)]
+        
+        for i in range(n):
+            goldcollected = self.collectGold(i,0,n,m,M,dp)
+            maxg = max(maxg,goldcollected)
+        return maxg
+
+
+#{ 
+ # Driver Code Starts
+# Initial Template for Python3
+
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        n, m = [int(x) for x in input().split()]
+        tarr = [int(x) for x in input().split()]
+        M = []
+        j = 0
+        for i in range (n):
+            M.append(tarr[j:j + m])
+            j = j+m
+        
+        ob = Solution()
+        print(ob.maxGold(n, m, M))
+# } Driver Code Ends
