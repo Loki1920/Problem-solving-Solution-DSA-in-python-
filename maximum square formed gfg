@@ -1,0 +1,30 @@
+#User function Template for python3
+
+class Solution:
+    def solve(self,mat,maxi):
+        dp = [[0 for i in  range(len(mat[0])+1)] for j in range(len(mat)+1)]
+        
+        for i in range(len(mat)-1,-1,-1):
+            for j in range(len(mat[0])-1,-1,-1):
+                right = dp[i][j+1]
+                diagonal = dp[i+1][j+1]
+                down = dp[i+1][j]
+                
+                if mat[i][j] == 1:
+                    dp[i][j] = 1 + min(right ,min(diagonal,down))
+                    maxi = max(maxi,dp[i][j])
+                else:
+                    dp[i][j] = 0
+        return maxi
+        
+        
+    def maxSquare(self, n, m, mat):
+        # code here
+        maxi = 0
+        maxi = max(maxi,self.solve(mat,maxi))
+        return maxi
+        
+        
+            
+        
+        
