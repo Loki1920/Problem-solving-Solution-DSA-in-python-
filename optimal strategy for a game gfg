@@ -1,0 +1,73 @@
+#User function Template for python3
+
+
+#Function to find the maximum possible amount of money we can win.
+class Solution:
+    def solve(self,i,j,arr,dp):
+        if i > j:
+            return 0
+        if dp[i][j] != -1:
+            return dp[i][j]
+        x = arr[i] + min(self.solve(i+2,j,arr,dp),self.solve(i+1,j-1,arr,dp))
+        y = arr[j] + min(self.solve(i,j-2,arr,dp),self.solve(i+1,j-1,arr,dp))
+        
+        dp[i][j] = max(x,y)
+        
+        return dp[i][j]
+    def optimalStrategyOfGame(self,arr, n):
+        # code here
+        
+        dp = [[-1 for i in range(n)] for j in range(n)]
+        
+        return self.solve(0,n-1,arr,dp)
+        
+        
+        
+        
+        
+        '''
+        # different approach
+        m = 0
+
+        i = 0
+        while len(arr)>0:
+            if i %2 ==0:
+                if arr[0] > arr[-1]:
+                    m += arr[0]
+                    arr.pop(0)
+                else:
+                    m += arr[-1]
+                    arr.pop(len(arr)-1)
+            if i % 2 == 1:
+                if arr[0] > arr[-1]:
+                    arr.pop(0)
+                else:
+                    arr.pop(len(arr)-1)
+            
+            i += 1
+            
+        return m
+        
+        '''
+            
+            
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+import atexit
+import io
+import sys
+
+# Contributed by : Nagendra Jha
+
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases):
+        n = int(input())
+        arr = list(map(int,input().strip().split()))
+        ob = Solution()
+        print(ob.optimalStrategyOfGame(arr,n))
+
+# } Driver Code Ends
