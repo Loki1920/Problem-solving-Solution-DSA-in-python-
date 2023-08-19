@@ -1,0 +1,61 @@
+#User function Template for python3
+
+#Function to find a continuous sub-array which adds up to a given number.
+class Solution:
+    def subArraySum(self,arr, n, s): 
+       #Write your code her
+       f = False
+       st =0
+       e =0
+       r = []
+       sum =0
+       
+       for i in range(n):
+           sum += arr[i]
+           if sum >= s:
+               e = i
+               while s < sum and st < e:
+                   sum -= arr[st]
+                   st += 1
+                  
+                   
+           if sum == s:
+               r.append(st+1)
+               r.append(e+1)
+               f = True
+               break
+       if f == False:
+           r.append(-1)
+       return r
+                   
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+import math
+
+def main():
+        T=int(input())
+        while(T>0):
+            
+            NS=input().strip().split()
+            N=int(NS[0])
+            S=int(NS[1])
+            
+            A=list(map(int,input().split()))
+            ob=Solution()
+            ans=ob.subArraySum(A, N, S)
+            
+            for i in ans:
+                print(i, end=" ")
+                
+            print()
+            
+            T-=1
+
+
+if __name__ == "__main__":
+    main()
+# } Driver Code Ends
