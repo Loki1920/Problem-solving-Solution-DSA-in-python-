@@ -1,0 +1,42 @@
+#User function Template for python3
+
+class Solution:
+	def Count(self, matrix):
+		# Code here
+		ans = 0
+		m = len(matrix)
+		n = len(matrix[0])
+		row  = [-1,-1,0,1,1,1,0,-1]
+		col = [0,1,1,1,0,-1,-1,-1]
+		for i in range(m):
+		    for j in range(n):
+		        if matrix[i][j] == 1:
+		            c = 0
+		            for k in range(8):
+		                nr = i+row[k]
+		                nc = j+col[k]
+		                if nr >= 0 and nr < m and nc >= 0 and nc < n and matrix[nr][nc] ==0:
+		                    c += 1
+		            if c > 0 and c%2 ==0:
+		                ans += 1
+	    return ans
+		            
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		n, m = input().split()
+		n = int(n); m = int(m);
+		matrix = []
+		for _ in range(n):
+			matrix.append(list(map(int,input().split())))
+		ob = Solution()
+		ans = ob.Count(matrix)
+		print(ans)
+
+# } Driver Code Ends
