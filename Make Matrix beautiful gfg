@@ -1,0 +1,39 @@
+#User function Template for python3
+
+class Solution:
+    def findMinOpeartion(self, matrix, n):
+        # Code here
+        
+        total_sum = 0
+        for i in range(n):
+            total_sum += sum(matrix[i])
+        rs = 0
+        cs = 0
+        for i in range(n):
+            a = 0
+            for j in range(n):
+                a += matrix[i][j]
+            rs = max(a,rs)
+            
+            b = 0
+            for j in range(n):
+                b += matrix[j][i]
+            cs = max(b,cs)
+        
+        maxi = max(cs,rs)
+        return n*maxi - total_sum
+        
+                
+
+
+#{ 
+ # Driver Code Starts
+
+#Initial Template for Python 3
+
+for _ in range(int(input())):
+    n = int(input())
+    matrix = [list(map(int,input().split())) for _ in range(n)]
+    ob = Solution()
+    print(ob.findMinOpeartion(matrix, n))
+# } Driver Code Ends
