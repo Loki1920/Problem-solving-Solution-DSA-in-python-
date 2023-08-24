@@ -1,0 +1,9 @@
+import numpy as np
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        c = nums1+nums2
+        c.sort()
+        n = len(c)
+
+        return np.median(c)
+        
