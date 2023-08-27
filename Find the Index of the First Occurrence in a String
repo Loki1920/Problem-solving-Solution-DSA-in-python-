@@ -1,0 +1,9 @@
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        r = []
+        if needle in haystack:
+            r.append(haystack.index(needle))
+        if r:
+            return r[0]
+        else:
+            return -1
