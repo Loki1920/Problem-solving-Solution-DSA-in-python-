@@ -1,0 +1,18 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        d = abs(dividend)
+        dv = abs(divisor)
+        op = 0
+
+        while d >= dv:
+            temp = dv
+            mul = 1
+            while d >= temp:
+                d-= temp
+                op += mul
+                mul += mul
+                temp += temp
+        if (dividend < 0 and divisor >= 0) or (dividend >=0 and divisor < 0):
+            return -op
+        return min(2**31 - 1,max(-2**31,op))
+        
