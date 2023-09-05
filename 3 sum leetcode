@@ -1,0 +1,71 @@
+from itertools import combinations
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        '''
+        nums.sort()
+        r = []
+        n = len(nums)
+
+        for i in  range(n):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            
+            j = i+1
+            k = n-1
+            while j < k:
+                sum1 = nums[i] + nums[j] + nums[k]
+                if sum1 < 0:
+                    j += 1
+                elif sum1 > 0:
+                    k -= 1
+                else:
+                    t = [nums[i],nums[j],nums[k]]
+                    if t not in r:r.append(t)
+                    j += 1
+                    k-= 1
+                    while j < k and nums[j] == nums[j-1]:
+                        j += 1
+                    while j < k and nums[k] == nums[k+1]:
+                        k -= 1
+            return r
+
+            '''
+
+
+        '''
+        nums.sort()
+        r = []
+        n = len(nums)
+        for i in  range(n):
+            d = []
+            for j in range(i+1,n):
+                third = -(nums[i] + nums[j])
+                if third in d:
+                    t = [nums[i],nums[j],third]
+                    t.sort()
+                    if t not in r:r.append(t)
+                d.append(nums[j])
+        return r
+
+        '''
+                
+
+
+
+        
+
+
+        '''
+        nums.sort()
+        r = []
+        n = len(nums)
+        for i in  range(n):
+            for j in range(i+1,n):
+                for k in range(j+1,n):
+                    t = []
+                    if i!= j != k and nums[i] + nums[j] + nums[k] == 0:
+                        if [nums[i],nums[j],nums[k]] not in r:
+                            r.append([nums[i],nums[j],nums[k]])
+        return r
+        '''
+
