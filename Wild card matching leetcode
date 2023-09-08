@@ -1,0 +1,27 @@
+class Solution:
+    def solve(self,stri,pt,i,j,dp):
+        if i < 0 and j < 0:
+            return True
+        if i >= 0 and j  < 0:
+            return False
+        if i < 0 and j >= 0:
+            for k in range(j+1):
+                if pt[k] != '*':
+                    return False
+            return True
+        if dp[i][j] != -1:
+            return dp[i][j]
+        
+        if (stri[i] == pt[j] or pt[j] == '?'):
+            dp[i][j] = self.solve(stri,pt,i-1,j-1,dp)
+            return dp[i][j]
+        elif pt[j] == '*':
+            dp[i][j] = (self.solve(stri,pt,i-1,j,dp) or self.solve(stri,pt,i,j-1,dp))
+            return dp[i][j]
+        else:
+            dp[i][j] = False
+            return dp[i][j]
+
+    def isMatch(self, s: str, p: str) -> bool:
+        dp = [[-1 for i in range(len(p))] for j in range(len(s))]
+        return self.solve(s,p,len(s)-1,len(p)-1,dp)
