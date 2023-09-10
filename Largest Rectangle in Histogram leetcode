@@ -1,0 +1,42 @@
+import numpy as np
+class Solution:
+    def nextSmall(self,arr,n):
+        s = []
+        s.append(-1)
+        ans = [0 for i in range(n)]
+        for i in range(n-1,-1,-1):
+            curr = arr[i]
+            while(s[-1] != -1 and arr[s[-1]] >= curr):
+                s.pop()
+            ans[i]=s[-1]
+            s.append(i)
+        return ans
+
+    def prevSmall(self,arr,n):
+        s = []
+        s.append(-1)
+        ans = [0 for i in range(n)]
+        for i in range(n):
+            curr = arr[i]
+            while(s[-1] != -1 and arr[s[-1]] >= curr):
+                s.pop()
+            ans[i]=s[-1]
+            s.append(i)
+        return ans
+
+
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        n = len(heights)
+        next = self.nextSmall(heights,n)
+        prev = self.prevSmall(heights,n)
+        area = -98765432
+        for i in range(n):
+            l = heights[i]
+            if next[i] == -1:
+                next[i] = n
+            b = next[i]-prev[i]-1
+            newArea = l * b
+            area = max(area,newArea)
+
+        return area
