@@ -1,0 +1,6 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        if len(nums)==0:
+            return [[]]
+        x = self.subsets(nums[:-1])
+        return x + [[nums[-1]] + y for y in x]
