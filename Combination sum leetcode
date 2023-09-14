@@ -1,0 +1,21 @@
+class Solution:
+    def solve(self,idx,arr,target,ans,ds):
+        if idx == len(arr):
+            if target == 0:
+                ans.append(ds.copy())
+            return 
+            
+        if arr[idx] <= target:
+            ds.append(arr[idx])
+            self.solve(idx,arr,target-arr[idx],ans,ds)
+            ds.pop()
+        self.solve(idx+1,arr,target,ans,ds)
+
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        ds = []
+
+
+        self.solve(0,candidates,target,ans,ds)
+        return ans
+
