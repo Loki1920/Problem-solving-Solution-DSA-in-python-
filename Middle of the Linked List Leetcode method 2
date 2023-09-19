@@ -1,0 +1,24 @@
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        '''
+        s,f = head,head
+
+        while f and f.next:
+            s = s.next
+            f = f.next.next
+        return s
+        '''
+        d = head
+        n = 0
+        while head:
+            n += 1
+            head = head.next 
+        t = n//2 + 1 
+
+        p = 0
+        while d:
+            p += 1
+            if p==t:
+                return d
+            d = d.next
+        
