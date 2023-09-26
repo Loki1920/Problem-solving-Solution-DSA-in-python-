@@ -1,0 +1,44 @@
+#User function Template for python3
+from collections import defaultdict
+class Solution:
+    def dfs(self,node,visited,adj):
+        if node not in  visited:
+            visited.add(node)
+            for i in adj[node]:
+                self.dfs(i,visited,adj)
+        
+    def numProvinces(self, adj, V):
+        adjl = defaultdict(list)
+        for i in  range(V):
+            for j in range(V):
+                if adj[i][j] != 0:
+                    adjl[i].append(j)
+                    
+        # code here 
+        c = 0
+        visited = set()
+        for i in  range(V):
+            if  i not in  visited:
+                self.dfs(i,visited,adjl)
+                c += 1
+        return c
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__': 
+    t = int (input ())
+    for _ in range (t):
+        V=int(input())
+        adj=[]
+        
+        for i in range(V):
+            temp = list(map(int,input().split()))
+            adj.append(temp);
+        
+        ob = Solution()
+        print(ob.numProvinces(adj,V))
+# } Driver Code Ends
