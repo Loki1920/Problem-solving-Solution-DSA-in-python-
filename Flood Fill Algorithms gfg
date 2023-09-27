@@ -1,0 +1,43 @@
+class Solution:
+    def dfs(self,rows,cols,image,ans ,newColor,dr,dc,ic):
+        ans[rows][cols] = newColor
+        m = len(image)
+        n = len(image[0])
+        for i in range(4):
+            nr  = rows + dr[i]
+            nc = cols +  dc[i]
+            if nr >=0 and nr < m and nc >=0 and nc < n and image[nr][nc]==ic and ans[nr][nc] != newColor:
+                self.dfs(nr,nc,image,ans , newColor,dr,dc,ic)
+	def floodFill(self, image, sr, sc, newColor):
+		#Code here
+		ic = image[sr][sc]
+		ans = image 
+		dr = [-1,0,1,0]
+		dc = [0,1,0,-1]
+		self.dfs(sr,sc,image,ans,newColor,dr,dc,ic)
+		return ans 
+
+
+#{ 
+ # Driver Code Starts
+import sys
+sys.setrecursionlimit(10**7)
+
+
+T=int(input())
+for i in range(T):
+	n, m = input().split()
+	n = int(n)
+	m = int(m)
+	image = []
+	for _ in range(n):
+		image.append(list(map(int, input().split())))
+	sr, sc, newColor = input().split()
+	sr = int(sr); sc = int(sc); newColor = int(newColor);
+	obj = Solution()
+	ans = obj.floodFill(image, sr, sc, newColor)
+	for _ in ans:
+		for __ in _:
+			print(__, end = " ")
+		print()
+# } Driver Code Ends
