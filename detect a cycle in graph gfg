@@ -1,0 +1,57 @@
+from typing import List
+class Solution:
+    #Function to detect cycle in an undirected graph.
+    def detect(self,src,adj,vis):
+        vis.add(src)
+        q = []
+        q.append((src,-1))
+        while q:
+            node = q[0][0]
+            parent = q[0][1]
+            q.pop(0)
+            
+            for i in adj[node]:
+                if i not in  vis:
+                    vis.add(i)
+                    q.append((i,node))
+                elif parent != i:
+                    return True 
+        
+        return False
+        
+                    
+            
+	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+		#Code here
+		vis = set()
+		for i in range(V):
+		    if i not in vis:
+		        if self.detect(i,adj,vis) == True:
+		            return True
+		            
+		return False
+		
+		
+
+
+#{ 
+ # Driver Code Starts
+
+if __name__ == '__main__':
+
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().split())
+		adj = [[] for i in range(V)]
+		for _ in range(E):
+			u, v = map(int, input().split())
+			adj[u].append(v)
+			adj[v].append(u)
+		obj = Solution()
+		ans = obj.isCycle(V, adj)
+		if(ans):
+			print("1")
+		else:
+			print("0")
+
+# } Driver Code Ends
