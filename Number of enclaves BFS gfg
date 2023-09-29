@@ -1,0 +1,80 @@
+#User function Template for python3
+
+from typing import List
+
+class Solution:
+        
+    def numberOfEnclaves(self, grid: List[List[int]]) -> int:
+        # code here
+        
+        n = len(grid)
+        m = len(grid[0])
+        q = []
+        
+        vis = [[0 for j in range(m)] for i in range(n)]
+        
+        dr = [-1,0,1,0]
+        dc = [0,1,0,-1]
+        
+        for j in range(m):
+            if vis[0][j] == 0 and grid[0][j] == 1:
+                q.append((0,j))
+                vis[0][j] = 1
+            if vis[n-1][j] == 0 and grid[n-1][j] == 1:
+                q.append((n-1,j))
+                vis[n-1][j] = 1
+        for i in range(n):
+            if vis[i][0] == 0 and grid[i][0] == 1:
+                q.append((i,0))
+                vis[i][0] = 1
+            if vis[i][m-1] == 0 and grid[i][m-1] == 1:
+                q.append((i,m-1))
+                vis[i][m-1] = 1
+        
+        
+        '''
+        for i in range(n):
+            for j in range(m):
+                if (i==0 or j == 0 or i == n-1 or j == m-1):
+                    if grid[i][j] == 1:
+                        q.append((i,j))
+                        vis[i][j] = 1 
+                        '''
+        
+        while q:
+            row = q[0][0]
+            col = q[0][1]
+            q.pop(0)
+            
+            for i in range(4):
+                nrow = row + dr[i]
+                ncol = col + dc[i]
+                
+                if nrow >= 0 and nrow < n and ncol >= 0 and ncol < m and vis[nrow][ncol] == 0 and grid[nrow][ncol] == 1:
+                    q.append((nrow,ncol))
+                    vis[nrow][nrow] = 1
+        
+        c = 0      
+        for i in range(n):
+            for j in range(m):
+                if vis[i][j] == 0 and grid[i][j] == 1:
+                    c += 1
+        return c
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+
+if __name__ == "__main__":
+    for _ in range(int(input())):
+        n, m = map(int,input().strip().split())
+        grid = []
+        for i in range(n):
+            grid.append([int(i) for i in input().strip().split()])
+
+        obj=Solution()
+        print(obj.numberOfEnclaves(grid))
+# } Driver Code Ends
