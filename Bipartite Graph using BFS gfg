@@ -1,0 +1,55 @@
+class Solution:
+    def check(self,start,V,adj,colour):
+		q = []
+		q.append(start)
+		
+		colour[start] = 0 
+		
+		
+		while q:
+		    node = q[0]
+		    q.pop(0)
+		    
+		    
+		    for i in adj[node]:
+		        if colour[i] == -1:
+		            colour[i] = not colour[node]
+		            q.append(i)
+		        elif colour[i] == colour[node]:
+		            return False 
+		return True
+
+        
+	def isBipartite(self, V, adj):
+		#code here
+		colour = [-1 for i in range(V)]
+		
+		for i in range(V):
+		    if colour[i] == -1:
+		        if self.check(i,V,adj,colour) == False:
+		            return False 
+		    
+		        
+		return True
+
+
+#{ 
+ # Driver Code Starts
+
+if __name__ == '__main__':
+	T=int(input())
+	for i in range(T):
+		V, E = map(int, input().strip().split())
+		adj = [[] for i in range(V)]
+		for i in range(E):
+			u, v = map(int, input().strip().split())
+			adj[u].append(v)
+			adj[v].append(u)
+		obj = Solution()
+		ans = obj.isBipartite(V, adj)
+		if(ans):
+			print("1")
+		else:
+			print("0")
+
+# } Driver Code Ends
