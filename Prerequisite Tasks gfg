@@ -1,0 +1,58 @@
+#User function Template for python3
+from collections import defaultdict 
+class Solution:
+    def isPossible(self,V,P,prerequisites):
+        #code here
+        adj = [[] for i in range(V)]
+        for i in prerequisites:
+            adj[i[0]].append(i[1])
+            
+        ind = [0 for i in  range(V)]
+        for i in range(V):
+            for j in adj[i]:
+                ind[j] += 1 
+        
+        q = []
+        for i in range(V):
+            if ind[i] == 0:
+                q.append(i)
+                
+        
+        
+        topo = []        
+        while q:
+            node = q[0]
+            q.pop(0)
+            topo.append(node)
+            
+            for i in adj[node]:
+                ind[i] -= 1
+                if ind[i] == 0:
+                    q.append(i)
+                    
+        if len(topo) == V:
+            return True
+        return False
+        
+    
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases) :
+        N=int(input())
+        P=int(input())
+
+        prerequisites=[]
+        for _ in range(P):
+            pair = [int(x) for x in input().split()]
+            prerequisites.append(pair)
+        ob=Solution()
+        if(ob.isPossible(N,P,prerequisites)):
+            print("Yes")
+        else:
+            print("No")
+# } Driver Code Ends
