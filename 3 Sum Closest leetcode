@@ -1,0 +1,28 @@
+from itertools import permutations 
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        maxi = float("inf")
+        resultSum = 0
+        
+        nums.sort()
+
+        for i in range(len(nums)):
+            l = i + 1
+            r = len(nums)-1 
+
+            while l < r:
+                cursum = nums[i] + nums[l] + nums[r]
+                if cursum == target:
+                    return target 
+                elif cursum < target:
+                    l += 1 
+                elif cursum > target :
+                    r -= 1 
+                if abs(cursum - target)< maxi:
+                    resultSum = cursum
+                    maxi = abs(cursum - target)
+        return resultSum 
+
+
+
+        
