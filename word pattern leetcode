@@ -1,0 +1,19 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        word = s.split(' ')
+        if len(pattern) != len(word):
+            return False 
+        d1 = {}
+        d2 = {} 
+
+        for c,w in zip(pattern,word):
+            if c in d1 and d1[c] != w:
+                return False 
+            if w in d2 and d2[w] != c:
+                return False 
+            d1[c] = w
+            d2[w] = c
+        return True
+
+
+        
