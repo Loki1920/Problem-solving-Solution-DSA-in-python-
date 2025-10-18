@@ -1,0 +1,65 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        n = len(nums)
+        if n < 4:
+            return []
+        
+        # 1. Sort the array. This is key. O(n log n)
+        nums.sort()
+        res = []
+        
+        # 2. Outer loop for the first number ('i')
+        for i in range(n - 3):
+            # 3. Skip duplicates for 'i'
+            # If this number is the same as the last one, we've already
+            # processed all combinations starting with it.
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+                
+            # --- Optimization: Pruning (optional but helpful) ---
+            # If the smallest possible sum from this point is > target, break
+            if nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target:
+                break
+            # If the largest possible sum with this 'i' is < target, continue
+            if nums[i] + nums[n - 1] + nums[n - 2] + nums[n - 3] < target:
+                continue
+            # -----------------------------------------------------
+
+            # 4. Second loop for the second number ('j')
+            for j in range(i + 1, n - 2):
+                # 5. Skip duplicates for 'j'
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+
+                # --- Optimization: Pruning (optional but helpful) ---
+                if nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target:
+                    break
+                if nums[i] + nums[j] + nums[n - 1] + nums[n - 2] < target:
+                    continue
+                # -----------------------------------------------------
+
+                # 6. Two-pointer (left/right) for the last two numbers
+                left = j + 1
+                right = n - 1
+                
+                while left < right:
+                    current_sum = nums[i] + nums[j] + nums[left] + nums[right]
+                    
+                    if current_sum == target:
+                        res.append([nums[i], nums[j], nums[left], nums[right]])
+                        
+                        # 7. Skip duplicates for 'left' and 'right'
+                        left += 1
+                        while left < right and nums[left] == nums[left - 1]:
+                            left += 1
+                            
+                        right -= 1
+                        while left < right and nums[right] == nums[right + 1]:
+                            right -= 1
+                            
+                    elif current_sum < target:
+                        left += 1  # Need a larger sum
+                    else:  # current_sum > target
+                        right -= 1 # Need a smaller sum
+                        
+        return res
