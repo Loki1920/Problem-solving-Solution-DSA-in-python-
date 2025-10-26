@@ -1,0 +1,10 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        c = itertools.permutations(nums)
+        res = []
+        for i in c:
+            if list(i) not in res:
+                res.append(list(i))
+
+        return res
+        
